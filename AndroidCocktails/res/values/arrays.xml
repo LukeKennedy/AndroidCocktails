@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_array">
+        <item>@string/sample_category</item>
+        <item>@string/sample_category</item>
+        <item>@string/sample_category</item>
+    </string-array>
+    
+    <string-array name="category_item_array">
+        <item>@string/sample_category_item</item>
+        <item>@string/sample_category_item</item>
+        <item>@string/sample_category_item</item>
+    </string-array>
+</resources>

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	public static final String dbName = "drinksDB";
-	public static final int dbVersion = 1;
+	public static final int dbVersion = 2;
 
 	static final String ASCENDING_ORDER = "ASC";
 	static final String DECENDING_ORDER = "DESC";
@@ -34,13 +34,13 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String colDirectionID = "ID";
 	public static final String colDirectionDrinkID = "DrinkID";
 	public static final String colDirection = "Direction";
-	public static final String colDirectionOrder = "Order";
+	public static final String colDirectionOrder = "DirectionOrder";
 
 	public static final String categoriesTable = "Categories";
 	public static final String colCategoryID = "ID";
 	public static final String colCategoryName = "Name";
 
-	public static final String drinksInCategoriesTable = "Categories";
+	public static final String drinksInCategoriesTable = "DrinksInCategories";
 	public static final String colDrinksInCategoriesID = "ID";
 	public static final String colDrinksInCategoriesDrinkID = "DrinkID";
 	public static final String colDrinksInCategoriesCategoryID = "CategoryID";
@@ -112,12 +112,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		db.execSQL("DROP TABLE IF EXISTS " + ingredientsInDrinksTable);
+		db.execSQL("DROP TABLE IF EXISTS " + drinksInCategoriesTable);
+		db.execSQL("DROP TABLE IF EXISTS " + directionsTable);
 		db.execSQL("DROP TABLE IF EXISTS " + drinksTable);
 		db.execSQL("DROP TABLE IF EXISTS " + ingredientsTable);
-		db.execSQL("DROP TABLE IF EXISTS " + ingredientsInDrinksTable);
-		db.execSQL("DROP TABLE IF EXISTS " + directionsTable);
 		db.execSQL("DROP TABLE IF EXISTS " + categoriesTable);
-		db.execSQL("DROP TABLE IF EXISTS " + drinksInCategoriesTable);
 		onCreate(db);
 	}
 
@@ -210,5 +210,13 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ colIngredientsInDrinksIngredientID + " WHERE "
 				+ colIngredientsInDrinksDrinkID + "=?;";
 		return db.rawQuery(query, new String[] { drinkID.toString() });
+	}
+
+	public void updateIngredientsAvailable(int ingredientID, int available) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "UPDATE " + ingredientsTable + " SET "
+				+ colIngredientAmount + "=" + available + " WHERE "
+				+ colIngredientsID + "=" + ingredientID + ";";
+		db.execSQL(query);
 	}
 }

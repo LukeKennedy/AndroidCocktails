@@ -8,9 +8,10 @@ import edu.rosehulman.cocktailguide.db.DBHelper;
 
 public class Ingredient {
 	private String mName;
+	private int mID;
 	private double mAmount;
 
-	public Ingredient(String name, double amount) {
+	public Ingredient(int ID, String name, double amount) {
 		mName = name;
 		mAmount = amount;
 	}
@@ -30,9 +31,15 @@ public class Ingredient {
 		while (cur.isAfterLast() == false) {
 			String name = cur.getString(cur.getColumnIndex(DBHelper.colIngredientsName));
 			int amount = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
-			ingredientList.add(new Ingredient(name, amount));
+			int id = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsID));
+			ingredientList.add(new Ingredient(id, name, amount));
 			cur.moveToNext();
 		}
 		return ingredientList;
+	}
+	
+	public void updateAmountAvailable(Context context, Double amount) {
+		mAmount = amount;
+		DBHelper.getInstance(context).updateIngredientsAvailable(mID, amount.intValue());
 	}
 }

@@ -6,43 +6,44 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-	static final String dbName = "drinksDB";
-	static final int dbVersion = 1;
+	public static final String dbName = "drinksDB";
+	public static final int dbVersion = 1;
 
 	static final String ASCENDING_ORDER = "ASC";
 	static final String DECENDING_ORDER = "DESC";
 
-	static final String drinksTable = "Drinks";
-	static final String colDrinkID = "ID";
-	static final String colDrinkName = "Name";
-	static final String colDrinkPicture = "Picture";
-	static final String colDrinkNumConsumed = "Consumed";
+	public static final String drinksTable = "Drinks";
+	public static final String colDrinkID = "ID";
+	public static final String colDrinkName = "Name";
+	public static final String colDrinkPicture = "Picture";
+	public static final String colDrinkDescription = "Description";
+	public static final String colDrinkNumConsumed = "Consumed";
 
-	static final String ingredientsTable = "Ingredients";
-	static final String colIngredientsID = "ID";
-	static final String colIngredientsName = "Name";
-	static final String colIngredientAmount = "Amount";
+	public static final String ingredientsTable = "Ingredients";
+	public static final String colIngredientsID = "ID";
+	public static final String colIngredientsName = "Name";
+	public static final String colIngredientAmount = "Amount";
 
-	static final String ingredientsInDrinksTable = "Ingredients_Drinks";
-	static final String colIngredientsInDrinksID = "ID";
-	static final String colIngredientsInDrinksDrinkID = "DrinkID";
-	static final String colIngredientsInDrinksIngredientID = "IngredientID";
-	static final String colIngredientsInDrinksAmount = "Amount";
+	public static final String ingredientsInDrinksTable = "Ingredients_Drinks";
+	public static final String colIngredientsInDrinksID = "ID";
+	public static final String colIngredientsInDrinksDrinkID = "DrinkID";
+	public static final String colIngredientsInDrinksIngredientID = "IngredientID";
+	public static final String colIngredientsInDrinksAmount = "Amount";
 
-	static final String directionsTable = "Directions";
-	static final String colDirectionID = "ID";
-	static final String colDirectionDrinkID = "DrinkID";
-	static final String colDirection = "Direction";
-	static final String colDirectionOrder = "Order";
+	public static final String directionsTable = "Directions";
+	public static final String colDirectionID = "ID";
+	public static final String colDirectionDrinkID = "DrinkID";
+	public static final String colDirection = "Direction";
+	public static final String colDirectionOrder = "Order";
 
-	static final String categoriesTable = "Categories";
-	static final String colCategoryID = "ID";
-	static final String colCategoryName = "Name";
+	public static final String categoriesTable = "Categories";
+	public static final String colCategoryID = "ID";
+	public static final String colCategoryName = "Name";
 
-	static final String drinksInCategoriesTable = "Categories";
-	static final String colDrinksInCategoriesID = "ID";
-	static final String colDrinksInCategoriesDrinkID = "DrinkID";
-	static final String colDrinksInCategoriesCategoryID = "CategoryID";
+	public static final String drinksInCategoriesTable = "Categories";
+	public static final String colDrinksInCategoriesID = "ID";
+	public static final String colDrinksInCategoriesDrinkID = "DrinkID";
+	public static final String colDrinksInCategoriesCategoryID = "CategoryID";
 
 	private static DBHelper mDBHelper;
 
@@ -75,7 +76,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + drinksTable + "(" + colDrinkID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colDrinkName
 				+ " TEXT, " + colDrinkPicture + " Integer, "
-				+ colDrinkNumConsumed + " Integer);");
+				+ colDrinkNumConsumed + " Integer, " + colDrinkDescription
+				+ " String);");
 		db.execSQL("CREATE TABLE " + ingredientsTable + "(" + colIngredientsID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colIngredientsName
 				+ " TEXT, " + colIngredientAmount + " REAL);");

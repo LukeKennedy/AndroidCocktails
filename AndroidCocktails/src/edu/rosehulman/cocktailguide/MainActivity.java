@@ -1,4 +1,4 @@
-package edu.rosehulman.androidcocktails;
+package edu.rosehulman.cocktailguide;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,15 +32,18 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_browse_drinks:
-			Intent browseDrinksIntent = new Intent(this, DrinkCategoryActivity.class);
+			Intent browseDrinksIntent = new Intent(this,
+					DrinkCategoryActivity.class);
 			startActivity(browseDrinksIntent);
 			break;
 		case R.id.btn_my_ingredients:
-			Intent ingredientsIntent = new Intent(this, IngredientListActivity.class);
+			Intent ingredientsIntent = new Intent(this,
+					IngredientListActivity.class);
 			startActivity(ingredientsIntent);
 			break;
 		case R.id.btn_random_drink:
-			Intent randomDrinksIntent = new Intent(this, DrinkRecipeActivity.class);
+			Intent randomDrinksIntent = new Intent(this,
+					DrinkRecipeActivity.class);
 			startActivity(randomDrinksIntent);
 			break;
 		default:

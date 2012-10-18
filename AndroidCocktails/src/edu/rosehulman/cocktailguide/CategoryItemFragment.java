@@ -1,4 +1,4 @@
-package edu.rosehulman.androidcocktails;
+package edu.rosehulman.cocktailguide;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

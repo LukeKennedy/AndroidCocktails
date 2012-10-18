@@ -1,5 +1,4 @@
-package edu.rosehulman.androidcocktails;
-
+package edu.rosehulman.cocktailguide;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,26 +7,25 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class IngredientEditActivity extends Activity implements OnClickListener {
+public class IngredientListActivity extends Activity implements OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ingredient_edit_layout);
+        setContentView(R.layout.ingredient_list_view);
         
-        ((Button)findViewById(R.id.btn_save)).setOnClickListener(this);
+        ((Button)findViewById(R.id.editButton1)).setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_ingredient_edit, menu);
+        getMenuInflater().inflate(R.menu.activity_ingredient_list, menu);
         return true;
     }
 
 	@Override
 	public void onClick(View v) {
-		Intent result = new Intent();
-		setResult(Activity.RESULT_OK, result);
-		finish();
+		Intent ingredientEditIntent = new Intent(this, IngredientEditActivity.class);
+		startActivity(ingredientEditIntent);
 	}
 }

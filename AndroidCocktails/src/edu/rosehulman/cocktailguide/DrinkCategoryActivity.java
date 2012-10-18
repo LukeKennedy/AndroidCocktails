@@ -1,5 +1,4 @@
-package edu.rosehulman.androidcocktails;
-
+package edu.rosehulman.cocktailguide;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;

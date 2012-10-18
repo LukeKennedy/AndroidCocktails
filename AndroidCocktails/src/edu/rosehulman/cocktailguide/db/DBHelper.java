@@ -188,4 +188,27 @@ public class DBHelper extends SQLiteOpenHelper {
 				having, orderBy);
 		return c;
 	}
+
+	public void addConsumed(String name, int consumed) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "UPDATE " + drinksTable + " SET " + colDrinkNumConsumed
+				+ "=" + consumed + " WHERE " + colDrinkName + "=" + name + ";";
+		db.execSQL(query);
+	}
+
+	public Cursor getDirectionsForDrink(Integer drinkID) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "SELECT * FROM " + directionsTable + " WHERE "
+				+ colDirectionDrinkID + "=?;";
+		return db.rawQuery(query, new String[] { drinkID.toString() });
+	}
+
+	public Cursor getIngredientsForDrink(Integer drinkID) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "SELECT * FROM " + ingredientsInDrinksTable + " JOIN "
+				+ ingredientsTable + " ON " + colIngredientsID + " = "
+				+ colIngredientsInDrinksIngredientID + " WHERE "
+				+ colIngredientsInDrinksDrinkID + "=?;";
+		return db.rawQuery(query, new String[] { drinkID.toString() });
+	}
 }

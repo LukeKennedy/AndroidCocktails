@@ -7,41 +7,41 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	public static final String dbName = "drinksDB";
-	public static final int dbVersion = 2;
+	public static final int dbVersion = 4;
 
 	static final String ASCENDING_ORDER = "ASC";
 	static final String DECENDING_ORDER = "DESC";
 
 	public static final String drinksTable = "Drinks";
-	public static final String colDrinkID = "ID";
+	public static final String colDrinkID = "_id";
 	public static final String colDrinkName = "Name";
 	public static final String colDrinkPicture = "Picture";
 	public static final String colDrinkDescription = "Description";
 	public static final String colDrinkNumConsumed = "Consumed";
 
 	public static final String ingredientsTable = "Ingredients";
-	public static final String colIngredientsID = "ID";
+	public static final String colIngredientsID = "_id";
 	public static final String colIngredientsName = "Name";
 	public static final String colIngredientAmount = "Amount";
 
 	public static final String ingredientsInDrinksTable = "Ingredients_Drinks";
-	public static final String colIngredientsInDrinksID = "ID";
+	public static final String colIngredientsInDrinksID = "_id";
 	public static final String colIngredientsInDrinksDrinkID = "DrinkID";
 	public static final String colIngredientsInDrinksIngredientID = "IngredientID";
 	public static final String colIngredientsInDrinksAmount = "Amount";
 
 	public static final String directionsTable = "Directions";
-	public static final String colDirectionID = "ID";
+	public static final String colDirectionID = "_id";
 	public static final String colDirectionDrinkID = "DrinkID";
 	public static final String colDirection = "Direction";
 	public static final String colDirectionOrder = "DirectionOrder";
 
 	public static final String categoriesTable = "Categories";
-	public static final String colCategoryID = "ID";
+	public static final String colCategoryID = "_id";
 	public static final String colCategoryName = "Name";
 
 	public static final String drinksInCategoriesTable = "DrinksInCategories";
-	public static final String colDrinksInCategoriesID = "ID";
+	public static final String colDrinksInCategoriesID = "_id";
 	public static final String colDrinksInCategoriesDrinkID = "DrinkID";
 	public static final String colDrinksInCategoriesCategoryID = "CategoryID";
 

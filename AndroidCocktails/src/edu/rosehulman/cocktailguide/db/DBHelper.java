@@ -1,5 +1,6 @@
 package edu.rosehulman.cocktailguide.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,7 +58,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	private DBHelper(Context context) {
 		super(context, dbName, null, dbVersion);
+		SQLiteDatabase db = this.getWritableDatabase();
+		resetDatabase(db);
+	}
 
+	private void initializeDatabaseValues() {
 		// EXAMPLE STUFF
 		// SQLiteDatabase db=this.getWritableDatabase();
 		// ContentValues cv=new ContentValues();
@@ -69,6 +74,28 @@ public class DBHelper extends SQLiteOpenHelper {
 		// cv.put(colDeptName, "IT");
 		// db.insert(deptTable, colDeptID, cv);
 		// db.close();
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+
+		cv.put(colCategoryName, "Rum");
+		cv.put(colCategoryID, 1);
+		db.insert(categoriesTable, colCategoryID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinkID, 1);
+		cv.put(colDrinkName, "Rum and Coke");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription, "Rum and Coke is best drink with coke.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 1);
+		cv.put(colDrinksInCategoriesCategoryID, 1);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		db.close();
 	}
 
 	@Override
@@ -108,10 +135,16 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ " (" + colDrinkID + "), FOREIGN KEY ("
 				+ colDrinksInCategoriesCategoryID + ") REFERENCES "
 				+ categoriesTable + " (" + colCategoryID + "));");
+
+		initializeDatabaseValues();
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		resetDatabase(db);
+	}
+
+	private void resetDatabase(SQLiteDatabase db) {
 		db.execSQL("DROP TABLE IF EXISTS " + ingredientsInDrinksTable);
 		db.execSQL("DROP TABLE IF EXISTS " + drinksInCategoriesTable);
 		db.execSQL("DROP TABLE IF EXISTS " + directionsTable);
@@ -157,6 +190,15 @@ public class DBHelper extends SQLiteOpenHelper {
 		Cursor c = db.query(tableName, columns, where, whereParams, groupBy,
 				having, orderBy);
 		return c;
+	}
+
+	public Cursor getDrinkFromCategoryCategories(Integer catID) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "SELECT * FROM " + drinksTable + " JOIN "
+				+ drinksInCategoriesTable + " ON " + colDrinkID + " = "
+				+ colDrinksInCategoriesDrinkID + " WHERE "
+				+ colDrinksInCategoriesCategoryID + "=?;";
+		return db.rawQuery(query, new String[] { catID.toString() });
 	}
 
 	public Cursor getDrinkByID(Integer drinkID) {

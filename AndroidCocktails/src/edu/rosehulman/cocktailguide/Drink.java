@@ -62,7 +62,7 @@ public class Drink {
 	}
 
 	public static Cursor GetDrinksFromCateogry(Context context, int categoryID) {
-		return null;
+		return DBHelper.getInstance(context).getDrinkFromCategoryCategories(categoryID);
 	}
 
 	public static Drink GetDrink(Context context, int drinkID) {

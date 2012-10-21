@@ -24,22 +24,49 @@ public class Ingredient {
 		return mAmount;
 	}
 
-	public static ArrayList<Ingredient> GetIngredientsForDrink(Context context, int drinkID) {
+	public static ArrayList<Ingredient> GetIngredientsForDrink(Context context,
+			int drinkID) {
 		ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
-		Cursor cur = DBHelper.getInstance(context).getIngredientsForDrink(drinkID);
+		Cursor cur = DBHelper.getInstance(context).getIngredientsForDrink(
+				drinkID);
 		cur.moveToFirst();
 		while (cur.isAfterLast() == false) {
-			String name = cur.getString(cur.getColumnIndex(DBHelper.colIngredientsName));
-			int amount = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
+			String name = cur.getString(cur
+					.getColumnIndex(DBHelper.colIngredientsName));
+			int amount = cur.getInt(cur
+					.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
 			int id = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsID));
 			ingredientList.add(new Ingredient(id, name, amount));
 			cur.moveToNext();
 		}
 		return ingredientList;
 	}
-	
+
+	public static ArrayList<Ingredient> GetAllIngredients(Context context) {
+		ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
+		Cursor cur = DBHelper.getInstance(context).getAllIngredients();
+		cur.moveToFirst();
+		while (cur.isAfterLast() == false) {
+			String name = cur.getString(cur
+					.getColumnIndex(DBHelper.colIngredientsName));
+			int amount = cur.getInt(cur
+					.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
+			int id = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsID));
+			ingredientList.add(new Ingredient(id, name, amount));
+			cur.moveToNext();
+		}
+		return ingredientList;
+	}
+
 	public void updateAmountAvailable(Context context, Double amount) {
 		mAmount = amount;
-		DBHelper.getInstance(context).updateIngredientsAvailable(mID, amount.intValue());
+		DBHelper.getInstance(context).updateIngredientsAvailable(mID,
+				amount.intValue());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		Ingredient other = (Ingredient) o;
+		return this.mName == other.mName;
 	}
 }

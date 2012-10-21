@@ -62,14 +62,17 @@ public class Drink {
 	}
 
 	public static Cursor GetDrinksFromCateogry(Context context, int categoryID) {
-		return DBHelper.getInstance(context).getDrinkFromCategoryCategories(categoryID);
+		return DBHelper.getInstance(context).getDrinkFromCategoryCategories(
+				categoryID);
 	}
 
 	public static Drink GetDrink(Context context, int drinkID) {
 		Cursor drinkData = DBHelper.getInstance(context).getDrinkByID(drinkID);
 		drinkData.moveToFirst();
+
 		int ID = drinkData
 				.getInt(drinkData.getColumnIndex(DBHelper.colDrinkID));
+
 		String drinkName = drinkData.getString(drinkData
 				.getColumnIndex(DBHelper.colDrinkName));
 		String drinkDescription = drinkData.getString(drinkData
@@ -87,5 +90,52 @@ public class Drink {
 	public void addConsumed(Context context) {
 		mConsumed++;
 		DBHelper.getInstance(context).addConsumed(mName, mConsumed);
+	}
+
+	public ArrayList<Drink> getDrinksThatCanBeMadeByTheIngriedentsOwned(Context context) {
+		ArrayList<Drink> toReturn = new ArrayList<Drink>();
+		ArrayList<Drink> allDrinks = getAllDrinksAsArrayList(context);
+		ArrayList<Ingredient> ingredientsOwned = Ingredient.GetAllIngredients(context);
+		Boolean hasAllTheStuff;
+		for(Drink drink : allDrinks) {
+			hasAllTheStuff = true;
+			for(Ingredient ingredientInDrink : drink.getIngredientList()) {
+				if(ingredientsOwned.contains(ingredientInDrink)) {
+					Ingredient fromOwned = ingredientsOwned.get(ingredientsOwned.indexOf(ingredientInDrink));
+					if(fromOwned.getAmount() < ingredientInDrink.getAmount()) {
+						hasAllTheStuff = false;
+						break;
+					}
+				}
+			}
+			if(hasAllTheStuff) {
+				toReturn.add(drink);
+			}
+		}
+		return toReturn;
+	}
+
+	public ArrayList<Drink> getAllDrinksAsArrayList(Context context) {
+		ArrayList<Drink> toReturn = new ArrayList<Drink>();
+		Cursor drinkData = DBHelper.getInstance(context).getAllDrinks();
+		drinkData.moveToFirst();
+		while (drinkData.isAfterLast() == false) {
+			int ID = drinkData.getInt(drinkData
+					.getColumnIndex(DBHelper.colDrinkID));
+
+			String drinkName = drinkData.getString(drinkData
+					.getColumnIndex(DBHelper.colDrinkName));
+			String drinkDescription = drinkData.getString(drinkData
+					.getColumnIndex(DBHelper.colDrinkDescription));
+			int drinkNumConsumed = drinkData.getInt(drinkData
+					.getColumnIndex(DBHelper.colDrinkNumConsumed));
+			int drinkDrawableID = drinkData.getInt(drinkData
+					.getColumnIndex(DBHelper.colDrinkPicture));
+			Drink drink = new Drink(context, ID, drinkName, drinkDescription,
+					drinkDrawableID, drinkNumConsumed);
+			toReturn.add(drink);
+			drinkData.moveToNext();
+		}
+		return toReturn;
 	}
 }

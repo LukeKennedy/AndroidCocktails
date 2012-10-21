@@ -50,10 +50,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	public static DBHelper getInstance(Context context) {
 		if (mDBHelper == null) {
-			return new DBHelper(context);
-		} else {
-			return mDBHelper;
+			mDBHelper = new DBHelper(context);
 		}
+		return mDBHelper;
 	}
 
 	private DBHelper(Context context) {
@@ -63,18 +62,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	}
 
 	private void initializeDatabaseValues() {
-		// EXAMPLE STUFF
-		// SQLiteDatabase db=this.getWritableDatabase();
-		// ContentValues cv=new ContentValues();
-		// cv.put(colDeptID, 1);
-		// cv.put(colDeptName, "Sales");
-		// db.insert(deptTable, colDeptID, cv);
-		//
-		// cv.put(colDeptID, 2);
-		// cv.put(colDeptName, "IT");
-		// db.insert(deptTable, colDeptID, cv);
-		// db.close();
-
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 
@@ -91,9 +78,76 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.insert(drinksTable, colDrinkID, cv);
 
 		cv = new ContentValues();
+		cv.put(colDrinkID, 2);
+		cv.put(colDrinkName, "Cuba Libre");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription,
+				"Rum and Coke with lime juice to add a sweet twist.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+
+		cv = new ContentValues();
 		cv.put(colDrinksInCategoriesDrinkID, 1);
 		cv.put(colDrinksInCategoriesCategoryID, 1);
 		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 2);
+		cv.put(colDrinksInCategoriesCategoryID, 1);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 1);
+		cv.put(colIngredientsName, "Rum");
+		cv.put(colIngredientAmount, 1);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 2);
+		cv.put(colIngredientsName, "Cola");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 3);
+		cv.put(colIngredientsName, "Lime Juice");
+		cv.put(colIngredientAmount, 0);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 1);
+		cv.put(colIngredientsInDrinksDrinkID, 1);
+		cv.put(colIngredientsInDrinksIngredientID, 1);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 2);
+		cv.put(colIngredientsInDrinksDrinkID, 1);
+		cv.put(colIngredientsInDrinksIngredientID, 2);
+		cv.put(colIngredientsInDrinksAmount, 2);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 3);
+		cv.put(colIngredientsInDrinksDrinkID, 2);
+		cv.put(colIngredientsInDrinksIngredientID, 1);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 4);
+		cv.put(colIngredientsInDrinksDrinkID, 2);
+		cv.put(colIngredientsInDrinksIngredientID, 2);
+		cv.put(colIngredientsInDrinksAmount, 2);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 5);
+		cv.put(colIngredientsInDrinksDrinkID, 2);
+		cv.put(colIngredientsInDrinksIngredientID, 3);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
 
 		db.close();
 	}
@@ -195,8 +249,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	public Cursor getDrinkFromCategoryCategories(Integer catID) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String query = "SELECT * FROM " + drinksTable + " JOIN "
-				+ drinksInCategoriesTable + " ON " + colDrinkID + " = "
-				+ colDrinksInCategoriesDrinkID + " WHERE "
+				+ drinksInCategoriesTable + " ON " + drinksTable + "."
+				+ colDrinkID + " = " + colDrinksInCategoriesDrinkID + " WHERE "
 				+ colDrinksInCategoriesCategoryID + "=?;";
 		return db.rawQuery(query, new String[] { catID.toString() });
 	}
@@ -260,5 +314,12 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ colIngredientAmount + "=" + available + " WHERE "
 				+ colIngredientsID + "=" + ingredientID + ";";
 		db.execSQL(query);
+	}
+
+	public Cursor getAllIngredients() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "SELECT * FROM " + ingredientsTable + " WHERE "
+				+ colIngredientAmount + " > 0;";
+		return db.rawQuery(query, null);
 	}
 }

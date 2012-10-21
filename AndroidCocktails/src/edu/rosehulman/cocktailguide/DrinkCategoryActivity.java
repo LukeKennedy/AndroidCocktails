@@ -44,16 +44,18 @@ public class DrinkCategoryActivity extends FragmentActivity implements OnItemCli
     }
 
 	@Override
-	public void onItemClick(AdapterView<?> list, View parent, int pos, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		Toast.makeText(this, "You hit Category " + id, Toast.LENGTH_SHORT).show();
-		DialogFragment newFragment = new CategoryItemFragment();
+		mCursor.moveToPosition(pos);
+		int categoryID = mCursor.getInt(mCursor.getColumnIndex(DBHelper.colCategoryID));
+		DialogFragment newFragment = new CategoryItemFragment(categoryID);
 		newFragment.show(getSupportFragmentManager(), "categoryItemPicker");
 	}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		Toast.makeText(this, "You hit Category item " + which, Toast.LENGTH_SHORT).show();
-		Intent drinkRecipyIntent = new Intent(this, DrinkRecipeActivity.class);
-		startActivity(drinkRecipyIntent);
+		Intent drinkRecipeIntent = new Intent(this, DrinkRecipeActivity.class);
+		startActivity(drinkRecipeIntent);
 	}
 }

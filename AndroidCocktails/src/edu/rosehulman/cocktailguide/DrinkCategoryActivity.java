@@ -1,31 +1,40 @@
 package edu.rosehulman.cocktailguide;
-import edu.rosehulman.cocktailguide.db.DBHelper;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import edu.rosehulman.cocktailguide.db.DBHelper;
 
 public class DrinkCategoryActivity extends FragmentActivity implements OnItemClickListener, OnClickListener {
 
 	private SimpleCursorAdapter mAdapter;
+	private Cursor mCursor;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_menu);
         
-        ((ListView)findViewById(R.id.category_list)).setOnItemClickListener(this);
+        ListView listView = (ListView)findViewById(R.id.category_list);
         
-        mAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, new String[] {DBHelper.colCategoryName}, new int[] {android.R.id.text1}, 0);
+        listView.setOnItemClickListener(this);
+        
+        mCursor = Drink.GetDrinkCategories(this);
+        mAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colCategoryName}, new int[] {android.R.id.text1}, 0);
+        Log.d("lol", "got a cursor");
+        listView.setAdapter(mAdapter);
+        Log.d("lol", "set the adapter");
     }
 
     @Override

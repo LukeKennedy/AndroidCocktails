@@ -22,39 +22,19 @@
         </activity>
         <activity
             android:name=".DrinkCategoryActivity"
-            android:label="@string/title_activity_browse_drinks" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name=".DrinkRecipeActivity"
-            android:label="@string/title_activity_drink_recipe" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name=".IngredientListActivity"
-            android:label="@string/title_activity_ingredient_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name=".IngredientEditActivity"
-            android:label="@string/title_activity_ingredient_edit" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

@@ -65,8 +65,16 @@ public class DBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 
-		cv.put(colCategoryName, "Rum");
+		cv.put(colCategoryName, "Rum Based");
 		cv.put(colCategoryID, 1);
+		db.insert(categoriesTable, colCategoryID, cv);
+
+		cv.put(colCategoryName, "Vodka Based");
+		cv.put(colCategoryID, 2);
+		db.insert(categoriesTable, colCategoryID, cv);
+
+		cv.put(colCategoryName, "Fruity Drinks");
+		cv.put(colCategoryID, 3);
 		db.insert(categoriesTable, colCategoryID, cv);
 
 		cv = new ContentValues();
@@ -87,6 +95,15 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.insert(drinksTable, colDrinkID, cv);
 
 		cv = new ContentValues();
+		cv.put(colDrinkID, 3);
+		cv.put(colDrinkName, "Screwdriver");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription,
+				"An easy, fruity drink that can be made for any occation in no time at all! Exceptionally easy to make super strong with no loss of flavor.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+
+		cv = new ContentValues();
 		cv.put(colDrinksInCategoriesDrinkID, 1);
 		cv.put(colDrinksInCategoriesCategoryID, 1);
 		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
@@ -94,6 +111,21 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinksInCategoriesDrinkID, 2);
 		cv.put(colDrinksInCategoriesCategoryID, 1);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 3);
+		cv.put(colDrinksInCategoriesCategoryID, 2);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 2);
+		cv.put(colDrinksInCategoriesCategoryID, 3);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 3);
+		cv.put(colDrinksInCategoriesCategoryID, 3);
 		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
 
 		cv = new ContentValues();
@@ -112,6 +144,18 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsID, 3);
 		cv.put(colIngredientsName, "Lime Juice");
 		cv.put(colIngredientAmount, 0);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 4);
+		cv.put(colIngredientsName, "Vodka");
+		cv.put(colIngredientAmount, 10);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 5);
+		cv.put(colIngredientsName, "Orange Juice");
+		cv.put(colIngredientAmount, 10);
 		db.insert(ingredientsTable, colIngredientsID, cv);
 
 		cv = new ContentValues();
@@ -147,6 +191,20 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsInDrinksDrinkID, 2);
 		cv.put(colIngredientsInDrinksIngredientID, 3);
 		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 6);
+		cv.put(colIngredientsInDrinksDrinkID, 3);
+		cv.put(colIngredientsInDrinksIngredientID, 4);
+		cv.put(colIngredientsInDrinksAmount, 2);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksID, 7);
+		cv.put(colIngredientsInDrinksDrinkID, 3);
+		cv.put(colIngredientsInDrinksIngredientID, 5);
+		cv.put(colIngredientsInDrinksAmount, 3);
 		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
 
 		db.close();
@@ -251,7 +309,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		String query = "SELECT * FROM " + drinksTable + " JOIN "
 				+ drinksInCategoriesTable + " ON " + drinksTable + "."
 				+ colDrinkID + " = " + colDrinksInCategoriesDrinkID + " WHERE "
-				+ colDrinksInCategoriesCategoryID + "=?;";
+				+ colDrinksInCategoriesCategoryID + "=? ORDER BY "
+				+ colDrinkName + " " + ASCENDING_ORDER + ";";
 		return db.rawQuery(query, new String[] { catID.toString() });
 	}
 

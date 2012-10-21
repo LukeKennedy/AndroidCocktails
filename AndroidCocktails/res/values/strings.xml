@@ -14,5 +14,6 @@
     <string name="sample_category_item">Sample Category Item</string>
     <string name="select_a_category">Select a Category</string>
     <string name="title_activity_ingredient_edit">IngredientEditActivity</string>
+    <string name="edit">Edit</string>
 
 </resources>

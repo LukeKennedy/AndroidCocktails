@@ -48,7 +48,8 @@ public class DrinkCategoryActivity extends FragmentActivity implements OnItemCli
 		Toast.makeText(this, "You hit Category " + id, Toast.LENGTH_SHORT).show();
 		mCursor.moveToPosition(pos);
 		int categoryID = mCursor.getInt(mCursor.getColumnIndex(DBHelper.colCategoryID));
-		DialogFragment newFragment = new CategoryItemFragment(categoryID);
+		String categoryName = mCursor.getString(mCursor.getColumnIndex(DBHelper.colCategoryName));
+		DialogFragment newFragment = new CategoryItemFragment(categoryID, categoryName);
 		newFragment.show(getSupportFragmentManager(), "categoryItemPicker");
 	}
 

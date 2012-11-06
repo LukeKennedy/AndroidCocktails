@@ -180,7 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsName, "Orange Juice");
 		cv.put(colIngredientAmount, 10);
 		db.insert(ingredientsTable, colIngredientsID, cv);
-		
+
 		cv = new ContentValues();
 		cv.put(colIngredientsID, 6);
 		cv.put(colIngredientsName, "Amaretto Liquor");
@@ -242,7 +242,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsInDrinksIngredientID, 5);
 		cv.put(colIngredientsInDrinksAmount, 3);
 		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
-		
+
 		cv = new ContentValues();
 		cv.put(colIngredientsInDrinksDrinkID, 4);
 		cv.put(colIngredientsInDrinksIngredientID, 6);
@@ -254,7 +254,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsInDrinksIngredientID, 7);
 		cv.put(colIngredientsInDrinksAmount, 1);
 		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
-		
+
 		// Directions
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 1);
@@ -291,10 +291,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colDirection, "Stir to mix.");
 		cv.put(colDirectionOrder, 2);
 		db.insert(directionsTable, colDirectionID, cv);
-		
+
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 4);
-		cv.put(colDirection, "Pour ingredients into a cocktail shaker over ice.");
+		cv.put(colDirection,
+				"Pour ingredients into a cocktail shaker over ice.");
 		cv.put(colDirectionOrder, 1);
 		db.insert(directionsTable, colDirectionID, cv);
 
@@ -303,7 +304,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colDirection, "Shake well.");
 		cv.put(colDirectionOrder, 2);
 		db.insert(directionsTable, colDirectionID, cv);
-		
+
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 4);
 		cv.put(colDirection, "Strain into tumbler over fresh ice.");
@@ -418,7 +419,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String tableName = drinksTable;
 		String[] columns = new String[] { colDrinkID, colDrinkName,
-				colDrinkNumConsumed, colDrinkPicture };
+				colDrinkDescription, colDrinkNumConsumed, colDrinkPicture };
 		String where = colDrinkID + "=?";
 		String[] whereParams = new String[] { drinkID.toString() };
 		String groupBy = null;
@@ -467,7 +468,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		return db.rawQuery(query, new String[] { drinkID.toString() });
 	}
 
-	public void updateIngredientsAvailable(int ingredientID, int available) {
+	public void updateIngredientsAvailable(int ingredientID, double available) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String query = "UPDATE " + ingredientsTable + " SET "
 				+ colIngredientAmount + "=" + available + " WHERE "

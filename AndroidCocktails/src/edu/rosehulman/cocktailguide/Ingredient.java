@@ -24,7 +24,7 @@ public class Ingredient {
 	public double getAmount() {
 		return mAmount;
 	}
-	
+
 	@Override
 	public String toString() {
 		return mName + " - " + mAmount;
@@ -39,7 +39,7 @@ public class Ingredient {
 		while (cur.isAfterLast() == false) {
 			String name = cur.getString(cur
 					.getColumnIndex(DBHelper.colIngredientsName));
-			int amount = cur.getInt(cur
+			double amount = cur.getDouble(cur
 					.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
 			int id = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsID));
 			ingredientList.add(new Ingredient(id, name, amount));
@@ -66,8 +66,7 @@ public class Ingredient {
 
 	public void updateAmountAvailable(Context context, Double amount) {
 		mAmount = amount;
-		DBHelper.getInstance(context).updateIngredientsAvailable(mID,
-				amount);
+		DBHelper.getInstance(context).updateIngredientsAvailable(mID, amount);
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String colCategoryName = "Name";
 
 	public static final String drinksInCategoriesTable = "DrinksInCategories";
-	public static final String colDrinksInCategoriesID = "_id";
-	public static final String colDrinksInCategoriesDrinkID = "DrinkID";
+	public static final String colDrinksInCategoriesID = "id";
+	public static final String colDrinksInCategoriesDrinkID = "DrinkIDInCategory";
 	public static final String colDrinksInCategoriesCategoryID = "CategoryID";
 
 	private static DBHelper mDBHelper;
@@ -127,6 +127,31 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colDrinkNumConsumed, 0);
 		db.insert(drinksTable, colDrinkID, cv);
 
+		cv = new ContentValues();
+		cv.put(colDrinkID, 6);
+		cv.put(colDrinkName, "Blue Hawaiian");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription,
+				"A spin on the classic Pina Colada with the addition of blue curacao.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinkID, 7);
+		cv.put(colDrinkName, "Cosmopolitan");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription, "The girliest of the girl drinks.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+		
+		cv = new ContentValues();
+		cv.put(colDrinkID, 8);
+		cv.put(colDrinkName, "Long Island Iced Tea");
+		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkDescription, "A shocking mix of whatever liquor the bartender could find.");
+		cv.put(colDrinkNumConsumed, 0);
+		db.insert(drinksTable, colDrinkID, cv);
+
 		// Drinks into Categories
 		cv = new ContentValues();
 		cv.put(colDrinksInCategoriesDrinkID, 1);
@@ -163,6 +188,35 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colDrinksInCategoriesCategoryID, 3);
 		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
 
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 6);
+		cv.put(colDrinksInCategoriesCategoryID, 3);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 6);
+		cv.put(colDrinksInCategoriesCategoryID, 1);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 7);
+		cv.put(colDrinksInCategoriesCategoryID, 2);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 7);
+		cv.put(colDrinksInCategoriesCategoryID, 3);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+		
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 8);
+		cv.put(colDrinksInCategoriesCategoryID, 1);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDrinksInCategoriesDrinkID, 8);
+		cv.put(colDrinksInCategoriesCategoryID, 2);
+		db.insert(drinksInCategoriesTable, colDrinksInCategoriesID, cv);
 		// Ingredients
 		cv = new ContentValues();
 		cv.put(colIngredientsID, 1);
@@ -233,6 +287,36 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colIngredientsID, 12);
 		cv.put(colIngredientsName, "Lemon Juice");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 13);
+		cv.put(colIngredientsName, "Pineapple Juice");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 14);
+		cv.put(colIngredientsName, "Blue Curacao");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 15);
+		cv.put(colIngredientsName, "Cream of Coconut");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 15);
+		cv.put(colIngredientsName, "Triple Sec");
+		cv.put(colIngredientAmount, 2);
+		db.insert(ingredientsTable, colIngredientsID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsID, 16);
+		cv.put(colIngredientsName, "Cranberry Juice");
 		cv.put(colIngredientAmount, 2);
 		db.insert(ingredientsTable, colIngredientsID, cv);
 
@@ -334,6 +418,54 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colIngredientsInDrinksAmount, 1);
 		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
 
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 6);
+		cv.put(colIngredientsInDrinksIngredientID, 1);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 6);
+		cv.put(colIngredientsInDrinksIngredientID, 13);
+		cv.put(colIngredientsInDrinksAmount, 2);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 6);
+		cv.put(colIngredientsInDrinksIngredientID, 14);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 6);
+		cv.put(colIngredientsInDrinksIngredientID, 15);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 7);
+		cv.put(colIngredientsInDrinksIngredientID, 4);
+		cv.put(colIngredientsInDrinksAmount, 1);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 7);
+		cv.put(colIngredientsInDrinksIngredientID, 16);
+		cv.put(colIngredientsInDrinksAmount, 1.5);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 7);
+		cv.put(colIngredientsInDrinksIngredientID, 3);
+		cv.put(colIngredientsInDrinksAmount, 0.5);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
+		cv = new ContentValues();
+		cv.put(colIngredientsInDrinksDrinkID, 7);
+		cv.put(colIngredientsInDrinksIngredientID, 17);
+		cv.put(colIngredientsInDrinksAmount, 0.5);
+		db.insert(ingredientsInDrinksTable, colIngredientsInDrinksID, cv);
+
 		// Directions
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 1);
@@ -399,13 +531,56 @@ public class DBHelper extends SQLiteOpenHelper {
 
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 5);
-		cv.put(colDirection, "Pour back and forth between two mixing glasses to blend.");
+		cv.put(colDirection,
+				"Pour back and forth between two mixing glasses to blend.");
 		cv.put(colDirectionOrder, 2);
 		db.insert(directionsTable, colDirectionID, cv);
 
 		cv = new ContentValues();
 		cv.put(colDirectionDrinkID, 5);
-		cv.put(colDirection, "Strain into an ice-filled highball glass. Garnish with celery stalk.");
+		cv.put(colDirection,
+				"Strain into an ice-filled highball glass. Garnish with celery stalk.");
+		cv.put(colDirectionOrder, 3);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 6);
+		cv.put(colDirection,
+				"Blend rum, blue curacao, pineapple juice, and cream of coconut with one cup ice in an electric blender at high speed.");
+		cv.put(colDirectionOrder, 1);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 6);
+		cv.put(colDirection, "Pour into highball glass.");
+		cv.put(colDirectionOrder, 2);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 6);
+		cv.put(colDirection,
+				"Garnish with a slice of pineapple and cherry. For true festivity, add a little umbrella.");
+		cv.put(colDirectionOrder, 3);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 7);
+		cv.put(colDirection,
+				"Shake vodka, triple sec, lime and cranberry juice vigorously in a shaker with ice.");
+		cv.put(colDirectionOrder, 1);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 7);
+		cv.put(colDirection,
+				"Strain into a martini glass.");
+		cv.put(colDirectionOrder, 2);
+		db.insert(directionsTable, colDirectionID, cv);
+
+		cv = new ContentValues();
+		cv.put(colDirectionDrinkID, 7);
+		cv.put(colDirection,
+				"Garnish with a lime wedge on the rim.");
 		cv.put(colDirectionOrder, 3);
 		db.insert(directionsTable, colDirectionID, cv);
 	}
@@ -478,7 +653,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public Cursor getAllDrinks() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String tableName = drinksTable;
-		String[] columns = new String[] { colDrinkID, colDrinkName };
+		String[] columns = new String[] { colDrinkID, colDrinkName, colDrinkDescription, colDrinkNumConsumed, colDrinkPicture };
 		String where = null;
 		String[] whereParams = null;
 		String groupBy = null;
@@ -581,8 +756,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	public Cursor getAllIngredients() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		String query = "SELECT * FROM " + ingredientsTable + " WHERE "
-				+ colIngredientAmount + " > 0 ORDER BY " + colIngredientsName +" " + ASCENDING_ORDER + ";";
+		String query = "SELECT * FROM " + ingredientsTable + " ORDER BY "
+				+ colIngredientsName + " " + ASCENDING_ORDER + ";";
 		Cursor toReturn = db.rawQuery(query, null);
 		return toReturn;
 	}

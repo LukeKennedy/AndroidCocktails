@@ -39,7 +39,7 @@ public class CategoryItemFragment extends DialogFragment implements OnItemClickL
 		
 		ListView listView = (ListView) dialog.findViewById(R.id.list_view);
 		mCursor = Drink.GetDrinksFromCateogry(getActivity(), categoryID);
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colDrinkID}, new int[] {android.R.id.text1}, 0);
+        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colDrinkName}, new int[] {android.R.id.text1}, 0);
         
         Log.d("lol", "got a cursor");
         listView.setAdapter(mAdapter);

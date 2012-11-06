@@ -58,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private DBHelper(Context context) {
 		super(context, dbName, null, dbVersion);
 		SQLiteDatabase db = this.getWritableDatabase();
-		resetDatabase(db);
+		//resetDatabase(db);
 	}
 
 	private void initializeDatabaseValues(SQLiteDatabase db) {

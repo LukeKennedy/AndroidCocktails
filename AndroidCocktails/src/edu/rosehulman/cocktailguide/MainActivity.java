@@ -1,5 +1,8 @@
 package edu.rosehulman.cocktailguide;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -46,8 +49,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			new DrinksICanMakeFragment().show(getSupportFragmentManager(), "drinksICanMakeFragment");
 			break;
 		case R.id.btn_random_drink:
+			ArrayList<Drink> drinks = Drink.getDrinksThatCanBeMadeByTheIngredientsOwned(this);
+			Random r = new Random();
+			int i = r.nextInt(drinks.size());
+			Drink drink = drinks.get(i);
 			Intent randomDrinksIntent = new Intent(this,
 					DrinkRecipeActivity.class);
+			randomDrinksIntent.putExtra(CategoryItemFragment.KEY_DRINK_ID, drink.getId());
 			startActivity(randomDrinksIntent);
 			break;
 		default:

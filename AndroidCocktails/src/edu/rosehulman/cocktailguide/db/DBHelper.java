@@ -87,7 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 1);
 		cv.put(colDrinkName, "Rum and Coke");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020004);
 		cv.put(colDrinkDescription, "Rum and Coke is best drink with coke.");
 		cv.put(colDrinkNumConsumed, 0);
 		db.insert(drinksTable, colDrinkID, cv);
@@ -95,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 2);
 		cv.put(colDrinkName, "Cuba Libre");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020004);
 		cv.put(colDrinkDescription,
 				"Rum and Coke with lime juice to add a sweet twist.");
 		cv.put(colDrinkNumConsumed, 0);
@@ -104,7 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 3);
 		cv.put(colDrinkName, "Screwdriver");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f02000b);
 		cv.put(colDrinkDescription,
 				"An easy, fruity drink that can be made for any occation in no time at all! Exceptionally easy to make super strong with no loss of flavor.");
 		cv.put(colDrinkNumConsumed, 0);
@@ -122,7 +122,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 5);
 		cv.put(colDrinkName, "Bloody Mary");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020001);
 		cv.put(colDrinkDescription, "For tomato juice lovers.");
 		cv.put(colDrinkNumConsumed, 0);
 		db.insert(drinksTable, colDrinkID, cv);
@@ -130,7 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 6);
 		cv.put(colDrinkName, "Blue Hawaiian");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020002);
 		cv.put(colDrinkDescription,
 				"A spin on the classic Pina Colada with the addition of blue curacao.");
 		cv.put(colDrinkNumConsumed, 0);
@@ -139,7 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 7);
 		cv.put(colDrinkName, "Cosmopolitan");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020003);
 		cv.put(colDrinkDescription, "The girliest of the girl drinks.");
 		cv.put(colDrinkNumConsumed, 0);
 		db.insert(drinksTable, colDrinkID, cv);
@@ -147,7 +147,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv = new ContentValues();
 		cv.put(colDrinkID, 8);
 		cv.put(colDrinkName, "Long Island Iced Tea");
-		cv.put(colDrinkPicture, 0x7f020000);
+		cv.put(colDrinkPicture, 0x7f020009);
 		cv.put(colDrinkDescription, "A shocking mix of whatever liquor the bartender could find.");
 		cv.put(colDrinkNumConsumed, 0);
 		db.insert(drinksTable, colDrinkID, cv);

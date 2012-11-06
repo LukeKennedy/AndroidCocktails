@@ -6,36 +6,28 @@
     android:background="@color/blue" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/ing_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Name" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:ems="10" />
+        android:textSize="24sp"/>
 
     <TextView
-        android:id="@+id/TextView2"
+        android:id="@+id/quantity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText1"
-        android:inputType="numberDecimal"
-        android:text="Quantity" />
+        android:layout_below="@+id/ing_name"
+        android:text="@string/quantity" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edit_text_amt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView2"
+        android:layout_below="@+id/quantity"
+        android:inputType="numberDecimal"
         android:ems="10" />
 
     <Button
@@ -44,6 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Save" />
+        android:text="@string/save" />
 
 </RelativeLayout>

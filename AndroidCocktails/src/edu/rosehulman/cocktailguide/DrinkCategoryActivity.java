@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import edu.rosehulman.cocktailguide.db.DBHelper;
 
-public class DrinkCategoryActivity extends FragmentActivity implements OnItemClickListener, OnClickListener {
+public class DrinkCategoryActivity extends FragmentActivity implements OnItemClickListener {
 
 	private SimpleCursorAdapter mAdapter;
 	private Cursor mCursor;
@@ -30,6 +30,9 @@ public class DrinkCategoryActivity extends FragmentActivity implements OnItemCli
         
         listView.setOnItemClickListener(this);
         
+        if (mCursor != null) {
+        	mCursor.close();
+        }
         mCursor = Drink.GetDrinkCategories(this);
         mAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colCategoryName}, new int[] {android.R.id.text1}, 0);
         Log.d("lol", "got a cursor");
@@ -45,18 +48,11 @@ public class DrinkCategoryActivity extends FragmentActivity implements OnItemCli
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-		Toast.makeText(this, "You hit Category " + id, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "You hit Category " + id, Toast.LENGTH_SHORT).show();
 		mCursor.moveToPosition(pos);
 		int categoryID = mCursor.getInt(mCursor.getColumnIndex(DBHelper.colCategoryID));
 		String categoryName = mCursor.getString(mCursor.getColumnIndex(DBHelper.colCategoryName));
 		DialogFragment newFragment = new CategoryItemFragment(categoryID, categoryName);
 		newFragment.show(getSupportFragmentManager(), "categoryItemPicker");
-	}
-
-	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		Toast.makeText(this, "You hit Category item " + which, Toast.LENGTH_SHORT).show();
-		Intent drinkRecipeIntent = new Intent(this, DrinkRecipeActivity.class);
-		startActivity(drinkRecipeIntent);
 	}
 }

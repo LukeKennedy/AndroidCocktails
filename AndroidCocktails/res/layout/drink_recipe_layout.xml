@@ -6,49 +6,25 @@
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drink_linear_layout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/drink_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Drink Name"
             android:textSize="32sp" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/drink_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/drink" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="5 oz Water" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="4 Ice Cubes" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="1 Lemon Wedge" />
-        
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Mix water and ice in shaker. Pour into tumble. Garnish with lemon wedge." />
     </LinearLayout>
 
 </ScrollView>

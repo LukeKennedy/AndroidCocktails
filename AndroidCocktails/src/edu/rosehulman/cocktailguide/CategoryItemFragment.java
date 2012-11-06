@@ -1,6 +1,7 @@
 package edu.rosehulman.cocktailguide;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +19,9 @@ public class CategoryItemFragment extends DialogFragment implements OnItemClickL
 	private SimpleCursorAdapter mAdapter;
 	private final int categoryID;
 	private final String categoryName;
+	private Cursor mCursor;
+	
+	static String KEY_DRINK_ID = "KEY_DRINK_ID";
 	
 	public CategoryItemFragment(int categoryID, String categoryName) {
 		this.categoryID = categoryID;
@@ -34,20 +38,25 @@ public class CategoryItemFragment extends DialogFragment implements OnItemClickL
 		dialog.setTitle(categoryName);
 		
 		ListView listView = (ListView) dialog.findViewById(R.id.list_view);
-		Cursor mCursor = Drink.GetDrinksFromCateogry(getActivity(), categoryID);
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colDrinkName}, new int[] {android.R.id.text1}, 0);
+		mCursor = Drink.GetDrinksFromCateogry(getActivity(), categoryID);
+        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor, new String[] {DBHelper.colDrinkID}, new int[] {android.R.id.text1}, 0);
         
         Log.d("lol", "got a cursor");
         listView.setAdapter(mAdapter);
         Log.d("lol", "set the adapter");
+        
+        listView.setOnItemClickListener(this);
 		
 		return dialog;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-		// TODO Auto-generated method stub
-		
+		mCursor.moveToPosition(pos);
+		int drinkId = mCursor.getInt(mCursor.getColumnIndex(DBHelper.colDrinkID));
+		Intent drinkRecipeIntent = new Intent(getActivity(), DrinkRecipeActivity.class);
+		drinkRecipeIntent.putExtra(KEY_DRINK_ID, drinkId);
+		startActivity(drinkRecipeIntent);
 	}
 	
 }

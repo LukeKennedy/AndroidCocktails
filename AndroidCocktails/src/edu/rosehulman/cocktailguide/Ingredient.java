@@ -12,6 +12,7 @@ public class Ingredient {
 	private double mAmount;
 
 	public Ingredient(int ID, String name, double amount) {
+		mID = ID;
 		mName = name;
 		mAmount = amount;
 	}
@@ -22,6 +23,11 @@ public class Ingredient {
 
 	public double getAmount() {
 		return mAmount;
+	}
+	
+	@Override
+	public String toString() {
+		return mName + " - " + mAmount;
 	}
 
 	public static ArrayList<Ingredient> GetIngredientsForDrink(Context context,
@@ -61,7 +67,7 @@ public class Ingredient {
 	public void updateAmountAvailable(Context context, Double amount) {
 		mAmount = amount;
 		DBHelper.getInstance(context).updateIngredientsAvailable(mID,
-				amount.intValue());
+				amount);
 	}
 
 	@Override

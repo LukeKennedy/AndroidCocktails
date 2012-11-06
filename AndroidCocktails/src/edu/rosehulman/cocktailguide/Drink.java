@@ -28,6 +28,8 @@ public class Drink {
 		mIngredientList = Ingredient.GetIngredientsForDrink(context, mID);
 		mDirections = Direction.GetDirectionsForDrink(context, mID);
 	}
+	
+	public int getId() { return mID; }
 
 	public String getName() {
 		return mName;
@@ -51,6 +53,11 @@ public class Drink {
 
 	public int getConsumed() {
 		return mConsumed;
+	}
+	
+	@Override
+	public String toString() {
+		return mName;
 	}
 
 	public static Cursor GetAllDrinks(Context context) {
@@ -92,7 +99,7 @@ public class Drink {
 		DBHelper.getInstance(context).addConsumed(mName, mConsumed);
 	}
 
-	public ArrayList<Drink> getDrinksThatCanBeMadeByTheIngriedentsOwned(Context context) {
+	public static ArrayList<Drink> getDrinksThatCanBeMadeByTheIngredientsOwned(Context context) {
 		ArrayList<Drink> toReturn = new ArrayList<Drink>();
 		ArrayList<Drink> allDrinks = getAllDrinksAsArrayList(context);
 		ArrayList<Ingredient> ingredientsOwned = Ingredient.GetAllIngredients(context);
@@ -115,7 +122,7 @@ public class Drink {
 		return toReturn;
 	}
 
-	public ArrayList<Drink> getAllDrinksAsArrayList(Context context) {
+	public static ArrayList<Drink> getAllDrinksAsArrayList(Context context) {
 		ArrayList<Drink> toReturn = new ArrayList<Drink>();
 		Cursor drinkData = DBHelper.getInstance(context).getAllDrinks();
 		drinkData.moveToFirst();

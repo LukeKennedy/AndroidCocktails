@@ -32,12 +32,19 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/browse_drinks" />
+        
+        <Button
+            android:id="@+id/btn_drinks_i_can_make"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/drinks_i_can_make" />
 
         <Button
             android:id="@+id/btn_my_ingredients"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/my_ingredients" />
+        
     </LinearLayout>
 
 </RelativeLayout>

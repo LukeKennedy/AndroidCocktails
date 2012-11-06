@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class DrinkRecipeActivity extends Activity {
 
 	private LinearLayout mLinearLayout;
+	private Drink mDrink;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,20 +19,17 @@ public class DrinkRecipeActivity extends Activity {
         
         mLinearLayout = (LinearLayout)findViewById(R.id.drink_linear_layout);
         
-        int drinkID = getIntent().getIntExtra(CategoryItemFragment.KEY_DRINK_ID, -1);
-        
-        if (drinkID < 0) {
-        	// GET RANDOM DRINK
+        if (mDrink == null) {
+	        int drinkID = getIntent().getIntExtra(CategoryItemFragment.KEY_DRINK_ID, -1);
+	        mDrink = Drink.GetDrink(this, drinkID);
         }
         
-        Drink drink = Drink.GetDrink(this, drinkID);
-        
-        ((TextView)findViewById(R.id.drink_name)).setText(drink.getName());
+        ((TextView)findViewById(R.id.drink_name)).setText(mDrink.getName());
         ImageView image = (ImageView)findViewById(R.id.drink_image);
-        Drawable drawable = drink.getPicture();
+        Drawable drawable = mDrink.getPicture();
         image.setImageDrawable(drawable);
         
-        for (Ingredient ingredient : drink.getIngredientList()) {
+        for (Ingredient ingredient : mDrink.getIngredientList()) {
         	TextView textView = new TextView(this);
         	textView.setTextSize(20);
         	textView.setText(ingredient.toString());
@@ -39,7 +37,7 @@ public class DrinkRecipeActivity extends Activity {
         	mLinearLayout.addView(textView);
         }
         
-        for (Direction direction : drink.getDirections()) {
+        for (Direction direction : mDrink.getDirections()) {
         	TextView textView = new TextView(this);
         	textView.setText(direction.getDirection());
         	

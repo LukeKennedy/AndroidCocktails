@@ -1,14 +1,14 @@
 package edu.rosehulman.cocktailguide;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				.setOnClickListener(this);
 		((Button) findViewById(R.id.btn_my_ingredients))
 				.setOnClickListener(this);
+		((Button) findViewById(R.id.btn_drinks_i_can_make)).setOnClickListener(this);
 		((Button) findViewById(R.id.btn_random_drink)).setOnClickListener(this);
 	}
 
@@ -40,6 +41,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			Intent ingredientsIntent = new Intent(this,
 					IngredientListActivity.class);
 			startActivity(ingredientsIntent);
+			break;
+		case R.id.btn_drinks_i_can_make:
+			new DrinksICanMakeFragment().show(getSupportFragmentManager(), "drinksICanMakeFragment");
 			break;
 		case R.id.btn_random_drink:
 			Intent randomDrinksIntent = new Intent(this,

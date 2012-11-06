@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	public static final String dbName = "drinksDB";
-	public static final int dbVersion = 4;
+	public static final int dbVersion = 5;
 
 	static final String ASCENDING_ORDER = "ASC";
 	static final String DECENDING_ORDER = "DESC";
@@ -61,9 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		resetDatabase(db);
 	}
 
-	private void initializeDatabaseValues() {
-		SQLiteDatabase db = this.getWritableDatabase();
-
+	private void initializeDatabaseValues(SQLiteDatabase db) {
 		// Categories
 		ContentValues cv = new ContentValues();
 		cv.put(colCategoryName, "Rum Based");
@@ -311,8 +309,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		cv.put(colDirection, "Strain into tumbler over fresh ice.");
 		cv.put(colDirectionOrder, 3);
 		db.insert(directionsTable, colDirectionID, cv);
-
-		db.close();
 	}
 
 	@Override
@@ -352,8 +348,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ " (" + colDrinkID + "), FOREIGN KEY ("
 				+ colDrinksInCategoriesCategoryID + ") REFERENCES "
 				+ categoriesTable + " (" + colCategoryID + "));");
-
-		initializeDatabaseValues();
+		initializeDatabaseValues(db);
 	}
 
 	@Override

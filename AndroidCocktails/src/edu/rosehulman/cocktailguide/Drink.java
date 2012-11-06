@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import edu.rosehulman.cocktailguide.db.DBHelper;
 
 public class Drink {
@@ -28,8 +29,10 @@ public class Drink {
 		mIngredientList = Ingredient.GetIngredientsForDrink(context, mID);
 		mDirections = Direction.GetDirectionsForDrink(context, mID);
 	}
-	
-	public int getId() { return mID; }
+
+	public int getId() {
+		return mID;
+	}
 
 	public String getName() {
 		return mName;
@@ -54,7 +57,7 @@ public class Drink {
 	public int getConsumed() {
 		return mConsumed;
 	}
-	
+
 	@Override
 	public String toString() {
 		return mName;
@@ -99,23 +102,25 @@ public class Drink {
 		DBHelper.getInstance(context).addConsumed(mName, mConsumed);
 	}
 
-	public static ArrayList<Drink> getDrinksThatCanBeMadeByTheIngredientsOwned(Context context) {
+	public static ArrayList<Drink> getDrinksThatCanBeMadeByTheIngredientsOwned(
+			Context context) {
 		ArrayList<Drink> toReturn = new ArrayList<Drink>();
 		ArrayList<Drink> allDrinks = getAllDrinksAsArrayList(context);
-		ArrayList<Ingredient> ingredientsOwned = Ingredient.GetAllIngredients(context);
+		ArrayList<Ingredient> ingredientsOwned = Ingredient
+				.GetAllIngredients(context);
 		Boolean hasAllTheStuff;
-		for(Drink drink : allDrinks) {
+		for (Drink drink : allDrinks) {
 			hasAllTheStuff = true;
-			for(Ingredient ingredientInDrink : drink.getIngredientList()) {
-				if(ingredientsOwned.contains(ingredientInDrink)) {
-					Ingredient fromOwned = ingredientsOwned.get(ingredientsOwned.indexOf(ingredientInDrink));
-					if(fromOwned.getAmount() < ingredientInDrink.getAmount()) {
-						hasAllTheStuff = false;
-						break;
-					}
+			ArrayList<Ingredient> inDrinkList = drink.getIngredientList();
+			for (Ingredient ingredientInDrink : inDrinkList) {
+				Ingredient fromOwned = ingredientsOwned.get(ingredientsOwned
+						.indexOf(ingredientInDrink));
+				if (fromOwned.getAmount() < ingredientInDrink.getAmount()) {
+					hasAllTheStuff = false;
+					break;
 				}
 			}
-			if(hasAllTheStuff) {
+			if (hasAllTheStuff) {				
 				toReturn.add(drink);
 			}
 		}

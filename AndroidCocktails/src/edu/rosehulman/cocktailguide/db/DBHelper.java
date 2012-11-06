@@ -462,9 +462,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	public Cursor getIngredientsForDrink(Integer drinkID) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String query = "SELECT * FROM " + ingredientsInDrinksTable + " JOIN "
-				+ ingredientsTable + " ON " + colIngredientsID + " = "
-				+ colIngredientsInDrinksIngredientID + " WHERE "
-				+ colIngredientsInDrinksDrinkID + "=?;";
+				+ ingredientsTable + " ON " + ingredientsTable + "."
+				+ colIngredientsID + " = " + colIngredientsInDrinksIngredientID
+				+ " WHERE " + colIngredientsInDrinksDrinkID + "=?;";
 		return db.rawQuery(query, new String[] { drinkID.toString() });
 	}
 

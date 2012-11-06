@@ -388,7 +388,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String orderBy = colDrinkName + " " + ASCENDING_ORDER;
 		Cursor c = db.query(tableName, columns, where, whereParams, groupBy,
 				having, orderBy);
-		db.close();
 		return c;
 	}
 
@@ -403,7 +402,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String orderBy = colDrinkName + " " + ASCENDING_ORDER;
 		Cursor c = db.query(tableName, columns, where, whereParams, groupBy,
 				having, orderBy);
-		db.close();
 		return c;
 	}
 
@@ -415,7 +413,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ colDrinksInCategoriesCategoryID + "=? ORDER BY "
 				+ colDrinkName + " " + ASCENDING_ORDER + ";";
 		Cursor toReturn = db.rawQuery(query, new String[] { catID.toString() });
-		db.close();
 		return toReturn;
 	}
 
@@ -446,7 +443,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String orderBy = null;
 		Cursor c = db.query(tableName, columns, where, whereParams, groupBy,
 				having, orderBy);
-		db.close();
 		return c;
 	}
 
@@ -455,7 +451,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String query = "UPDATE " + drinksTable + " SET " + colDrinkNumConsumed
 				+ "=" + consumed + " WHERE " + colDrinkName + "=" + name + ";";
 		db.execSQL(query);
-		db.close();
 	}
 
 	public Cursor getDirectionsForDrink(Integer drinkID) {
@@ -464,7 +459,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ colDirectionDrinkID + "=?;";
 		Cursor toReturn = db.rawQuery(query,
 				new String[] { drinkID.toString() });
-		db.close();
 		return toReturn;
 	}
 
@@ -476,7 +470,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ " WHERE " + colIngredientsInDrinksDrinkID + "=?;";
 		Cursor toReturn = db.rawQuery(query,
 				new String[] { drinkID.toString() });
-		db.close();
 		return toReturn;
 	}
 
@@ -486,7 +479,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ colIngredientAmount + "=" + available + " WHERE "
 				+ colIngredientsID + "=" + ingredientID + ";";
 		db.execSQL(query);
-		db.close();
 	}
 
 	public Cursor getAllIngredients() {
@@ -494,7 +486,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String query = "SELECT * FROM " + ingredientsTable + " WHERE "
 				+ colIngredientAmount + " > 0;";
 		Cursor toReturn = db.rawQuery(query, null);
-		db.close();
 		return toReturn;
 	}
 }

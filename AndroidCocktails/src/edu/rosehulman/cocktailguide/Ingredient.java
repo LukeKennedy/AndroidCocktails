@@ -55,8 +55,8 @@ public class Ingredient {
 		while (cur.isAfterLast() == false) {
 			String name = cur.getString(cur
 					.getColumnIndex(DBHelper.colIngredientsName));
-			int amount = cur.getInt(cur
-					.getColumnIndex(DBHelper.colIngredientsInDrinksAmount));
+			double amount = cur.getDouble(cur
+					.getColumnIndex(DBHelper.colIngredientAmount));
 			int id = cur.getInt(cur.getColumnIndex(DBHelper.colIngredientsID));
 			ingredientList.add(new Ingredient(id, name, amount));
 			cur.moveToNext();
@@ -72,6 +72,6 @@ public class Ingredient {
 	@Override
 	public boolean equals(Object o) {
 		Ingredient other = (Ingredient) o;
-		return this.mName == other.mName;
+		return this.mName.equalsIgnoreCase(other.mName);
 	}
 }

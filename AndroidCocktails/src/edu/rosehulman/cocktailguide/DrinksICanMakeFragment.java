@@ -28,7 +28,7 @@ public class DrinksICanMakeFragment extends DialogFragment implements OnItemClic
 		
 		ListView listView = (ListView) dialog.findViewById(R.id.list_view);
 		
-		mDrinks = Drink.getAllDrinksAsArrayList(getActivity());
+		mDrinks = Drink.getDrinksThatCanBeMadeByTheIngredientsOwned(getActivity());
 		ArrayAdapter<Drink> adapter = new ArrayAdapter<Drink>(getActivity(), android.R.layout.simple_list_item_1, mDrinks);
 		
 		listView.setAdapter(adapter);
